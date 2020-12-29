@@ -1,22 +1,24 @@
 let result = document.getElementById("result");
-let jokeBtn = document.getElementById("jokeBtn");
+let anyjokeBtn = document.getElementById("anyjokeBtn");
 
 const getJoke = async () => {
   const url =
-    "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single";
+    "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit";
   const response = await fetch(url);
   const data = await response.json();
   console.log(data);
   if (data.type === "single") {
     result.innerHTML = data.joke;
+    result.style.color = "green";
   }
   if (data.type === "twopart") {
-    result.innerHTML = `<p class="two-part">${data.setup}</p> <p class="two-part">${data.delivery}</p>`;
+    result.innerHTML = `<p class="two-part"><strong>Question:</strong> ${data.setup}</p> <p class="two-part"><strong>Answer:</strong> ${data.delivery}</p>`;
+    result.style.color = "purple";
   }
 };
 
 //EVENT LISTENER
-jokeBtn.addEventListener("click", getJoke);
+anyjokeBtn.addEventListener("click", getJoke);
 
 // ONE PART JOKE
 // "category": "Misc",
